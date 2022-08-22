@@ -6,14 +6,18 @@ import (
 	"time"
 )
 
-func Unix(webkitTimestamp string) time.Time {
+func Epoch(webkitTimestamp string) int64 {
 	wt, err := strconv.ParseInt(webkitTimestamp, 10, 64)
 	if err != nil {
 		log.Printf("Failed to parse webkit timestamp: %s", err)
-		return time.Time{}
+		return 0
 	}
 
-	unixTime := time.Unix((wt/1000000)-11644473600, 0)
+	return (wt / 1000000) - 11644473600
+}
+
+func Unix(webkitTimestamp string) time.Time {
+	unixTime := time.Unix(Epoch(webkitTimestamp), 0)
 
 	return unixTime
 }

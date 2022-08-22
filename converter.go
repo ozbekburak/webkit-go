@@ -25,3 +25,7 @@ func Unix(webkitTimestamp string) time.Time {
 func ISO8601(webkitTimestamp string) string {
 	return Unix(webkitTimestamp).Format("2006-01-02T15:04:05Z")
 }
+
+func RFC3339(webkitTimestamp string) string {
+	return Unix(webkitTimestamp).Format(time.RFC3339)
+}
